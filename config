@@ -1,0 +1,257 @@
+[colors]
+bg = #049aea
+fg = #f9f7f9
+
+[settings]
+throttle-ms = 50
+throttle-limit = 5
+
+
+[bar/top]
+monitor = eDP-1
+width = 100%
+height = 20
+offset-y = 5
+
+background = #ff
+foreground = #f2f2f2
+
+overline-size = 2
+overline-color = #bc92f8
+underline-size = 2
+underline-color = #bc92f8
+
+spacing = 1
+padding-right = 2
+module-margin-left = 0
+module-margin-right = 2
+
+font-0 = NotoSans-Regular:size=8;0
+font-1 = FontAwesome:size=8;-2
+font-2 = ypn envypn:size=10;-1
+font-3 = Termsynu:size=8;-1
+font-4 = Unifont:size=6;-3
+
+modules-center = xwindow
+
+[bar/bar]
+monitor = eDP-1
+width = 100%
+height = 27
+offset-y = 5
+
+background = #00
+#425e57
+foreground = ${colors.fg}
+
+overline-size = 2
+overline-color = #bc92f8
+underline-size = 2
+underline-color = #bc92f8
+
+spacing = 1
+padding-right = 2
+module-margin-left = 0
+module-margin-right = 2
+
+font-0 = NotoSans-Regular:size=8;0
+font-1 = FontAwesome:size=8;-2
+font-2 = ypn envypn:size=10;-1
+font-3 = Termsynu:size=8;-1
+font-4 = Unifont:size=6;-3
+
+modules-left = i3
+modules-right = volume cpu memory wlan battery clock
+
+bottom=true
+
+
+[module/i3]
+type = internal/i3
+
+format = <label-state> <label-mode>
+format-spacing = 0
+
+label-focused = %index%
+label-focused-padding = 2
+label-focused-margin = 1
+label-focused-font = 3
+#label-focused-foreground = ${color.fg1}
+label-focused-background = ${colors.bg}
+label-focused-underline = ${colors.bg}
+
+label-unfocused = %index%
+label-unfocused-padding = 2
+label-unfocused-margin = 1
+label-unfocused-background = #fff
+label-unfocused-foreground = #dd222222
+label-unfocused-underline = ${colors.bg}
+label-unfocused-font = 3
+
+label-urgent = %index%
+label-urgent-padding = 2
+label-urgent-margin = 1
+label-urgent-font = 3
+
+label-visible = %index%
+label-visible-padding = 2
+label-visible-margin = 1
+label-visible-font = 3
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+
+format = <label> <ramp-coreload>
+#format-background = #5c917b
+format-underline = ${colors.bg}
+format-padding = 2
+
+label = cpu
+label-font = 3
+
+ramp-coreload-0 = ▁
+ramp-coreload-0-font = 5
+ramp-coreload-1 = ▂
+ramp-coreload-1-font = 5
+ramp-coreload-2 = ▃
+ramp-coreload-2-font = 5
+ramp-coreload-3 = ▄
+ramp-coreload-3-font = 5
+ramp-coreload-4 = ▅
+ramp-coreload-4-font = 5
+ramp-coreload-5 = ▆
+ramp-coreload-5-font = 5
+ramp-coreload-6 = ▇
+ramp-coreload-6-font = 5
+ramp-coreload-6-foreground = #ff3b51
+ramp-coreload-7 = █
+ramp-coreload-7-font = 5
+ramp-coreload-7-foreground = #ff3b51
+
+[module/memory]
+type = internal/memory
+
+format = <label> <bar-used>
+format-padding = 2
+#format-background = #5c917b
+format-underline = ${colors.bg}
+label-active-margin = 1
+label-active-font = 3
+label-active-background = #2fbbf2
+label-active-underline = ${colors.bg}
+
+label-occupied = %index%
+label-occupied-padding = 2
+label-occupied-margin = 1
+label-occupied-background = #eeeeee
+label-occupied-underline = ${colors.bg}
+label-occupied-font = 3
+
+label-urgent = %index%
+label-urgent-padding = 2
+label-urgent-margin = 1
+label-urgent-font = 3
+
+label-empty = %index%
+label-empty-padding = 2
+label-empty-margin = 1
+label-empty-font = 3
+
+[module/memory]
+
+label = memory
+label-font = 3
+
+bar-used-width = 10
+bar-used-indicator = |
+bar-used-indicator-font = 4
+bar-used-indicator-foreground = #ffaaf5
+bar-used-fill = ─
+bar-used-fill-font = 4
+bar-used-fill-foreground = #ffaaf5
+bar-used-empty = ─
+bar-used-empty-font = 4
+bar-used-empty-foreground = #934e94
+
+[module/clock]
+type = internal/date
+date = %%{T3}%Y-%m-%d %H:%M%%{T-}
+
+format-padding = 2
+format-background = #228766
+format-underline = ${colors.bg}
+
+[module/battery]
+type = internal/battery
+
+full-at = 99
+
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT0
+adapter = ADP1
+
+; Default: 5
+poll-interval = 5
+format-padding = 2
+
+#format-charging-background = #
+format-charging-foreground = ${colors.bg}
+format-charging-underline = ${colors.bg}
+#format-charging-overline = #5ba889
+format-charging = <label-charging>
+
+format-discharging = <label-discharging>
+format-discharging-underline = ${colors.bg}
+
+label-charging = " charging %percentage%% "
+label-discharging = " discharging %percentage%% "
+label-full = full
+
+[module/wlan]
+type = internal/network
+interface = wlan0
+format-connected = %{A:nmtui-connect&:}<label-connected>%{A}
+
+format-disconnected =%{A:nmtui-connect&:} <label-disconnected>%{A}
+
+format-packetloss = <animation-packetloss> <label-connected>
+
+label-connected = %essid% %downspeed:9%
+label-connected-underline = ${colors.bg}
+
+label-disconnected = not connected
+label-disconnected-foreground = #66ffffff
+label-disconnected-underline = ${colors.bg}
+
+animation-packetloss-0 = ⚠
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 📶
+animation-packetloss-1-foreground = #000000
+animation-packetloss-framerate = 500
+
+
+[module/volume]
+type = internal/alsa
+speaker-mixer = Speaker
+headphone-mixer = Headphone
+headphone-id = 9
+
+format-volume-padding = 2
+format-volume-underline = ${colors.bg}
+
+format-muted-padding = 2
+format-muted-background = #77ffffff
+format-muted-foreground = #fff
+
+label-volume = volume %percentage%
+label-volume-font = 3
+label-muted = *muted*
+label-muted-font = 3
+
+[module/xwindow]
+type = internal/xwindow
+label-font = 3
+
+; vim:ft=dosini
